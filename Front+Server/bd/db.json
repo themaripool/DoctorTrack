@@ -1,0 +1,36 @@
+{
+    "receitas": [
+        {
+            "idReceita": "12536482",
+            "nome_medico": "Medico X",
+            "nome_paciente": "Paciente Y",
+            "nome_medicamento": "Medicamento Z",
+            "cpf_paciente": "12897276789",
+            "validacao_medico": "false",
+            "marca_uso": "false",
+            "description": "Usar ate os sintomas desaparecerem",
+            "data_validade": "20/08/2020"
+        },
+        {
+            "idReceita": "123456789",
+            "nome_medico": "Medico B",
+            "nome_paciente": "Paciente Y",
+            "nome_medicamento": "Medicamento A",
+            "cpf_paciente": "12897276787",
+            "validacao_medico": "true",
+            "marca_uso": "false",
+            "description": "Usar a cada 12 horas",
+            "data_validade": "20/09/2019"
+        }
+    ],
+    "medicamentos": [
+        {
+            "codigo_barras": "1831524379504",
+            "nome_medicamento": "Medicamento Z",
+            "nome_fabrica": "Fabrica X",
+            "data_fabricacao": "20/03/2018",
+            "numero_lote": "123455",
+            "data_validade": "20/03/2020"
+        }
+    ]
+}

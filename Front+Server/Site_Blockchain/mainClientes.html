@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="./myconfig.css" type="text/css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Doctor Track</title>
+    <script>
+    function getBdReceitas(){
+      let pai = document.getElementById("inserir");
+      let id = document.getElementById("idReceita").value.toString();
+      let url = `/receitas/${id}`;
+      fetch(url).then((resp)=>{
+        return resp.json()
+      }).then((data)=>{
+        console.log(data);
+        if(data[0] == null){
+          let mainDiv = document.createElement('div');
+          mainDiv.setAttribute('class', 'card mb-4 shadow-sm');
+          mainDiv.innerHTML = 'Não existe';
+          pai.appendChild(mainDiv);
+        }else{
+        data.map((receita)=>{
+          let mainDiv = document.createElement('div');
+          mainDiv.setAttribute('class', 'card mb-4 shadow-sm');
+          
+          let insideFirstDiv = document.createElement('div');
+            insideFirstDiv.setAttribute('class','card-header');
+          
+            let firstHeader = document.createElement('h4');
+          firstHeader.setAttribute('class','my-0 font-weight-normal');
+          (receita.nome_medico)?firstHeader.innerHTML = `${receita.nome_medico}`: firstHeader.innerHTML = "Não existe";
+          
+          let insideSecondDiv = document.createElement('div');
+          insideSecondDiv.setAttribute('class','card-body');
+
+          let medicamento = document.createElement('h1');
+          medicamento.setAttribute('class', 'card-title pricing-card-title');
+          (receita.nome_medicamento)?medicamento.innerHTML = `${receita.nome_medicamento}`: medicamento.innerHTML = 'Não existe';
+
+          let ulist = document.createElement('ul');
+          ulist.setAttribute('class', 'list-unstyled mt-3 mb-4');
+
+          let l1 = document.createElement('li');
+          (receita.data_validade)?l1.innerHTML = `Data de validade: ${receita.data_validade}`: l1.innerHTML = 'Não existe';
+
+          let l2 = document.createElement('li');
+          (receita.idReceita)?l2.innerHTML = `Id da receita: ${receita.idReceita}`:l2.innerHTML = 'Não existe';
+
+
+          let l3 = document.createElement('li');
+          (receita.validacao_medico)?l3.innerHTML = `Validação medica: ${receita.validacao_medico}`:l3.innerHTML = 'Não existe';
+
+          let l4 = document.createElement('li');
+          l4.innerHTML = `Descrição: ${receita.description}`
+
+          ulist.appendChild(l1);
+          ulist.appendChild(l2);
+          ulist.appendChild(l3);
+          ulist.appendChild(l4);
+
+          insideSecondDiv.appendChild(medicamento);
+          insideSecondDiv.appendChild(ulist);
+          insideFirstDiv.appendChild(firstHeader);
+          
+          mainDiv.appendChild(insideFirstDiv);
+          mainDiv.appendChild(insideSecondDiv);
+          
+          pai.appendChild(mainDiv);
+        });}
+      })
+    }
+    </script>
+  </head>
+  <body>
+    <h1>Hello, world!</h1>
+
+    <header>
+ <!-- Fixed navbar -->
+ <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+   <a class="navbar-brand" href="home.html">Doctor Track</a>
+   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+     <span class="navbar-toggler-icon"></span>
+   </button>
+   <div class="collapse navbar-collapse" id="navbarCollapse">
+     <ul class="navbar-nav mr-auto">
+       <li class="nav-item active">
+         <a class="nav-link" href="mainClientes.html">Receitas <span class="sr-only">(current)</span></a>
+       </li>
+       <li class="nav-item">
+         <a class="nav-link" href="medicamentos.html">Medicamentos</a>
+       </li>
+       <!-- <li class="nav-item">
+         <a class="nav-link" href="medicos.html">Médicos</a>
+       </li> -->
+     </ul>
+     <!-- SEARCH -->
+     <form class="form-inline mt-2 mt-md-0">
+       <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+     </form>
+   </div>
+ </nav>
+</header>
+
+<!-- Begin page content -->
+<main role="main" class="flex-shrink-0">
+  <div class="container">
+    <h1 class="mt-5">Receitas</h1>
+  </div>
+
+  <!-- Exibicao receitas -->
+
+  <div class="container">
+    <div class="col-md-3 container text-center">
+      <form>
+        <input id="idReceita" />
+        <button type="button" onclick="getBdReceitas()" class="btn btn-primary paddingOP">Procurar receita</button>
+      </form>
+    </div>
+  <div class="card-deck mb-3 text-center" id="inserir">
+    
+    </div>
+  </div>
+</main>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>

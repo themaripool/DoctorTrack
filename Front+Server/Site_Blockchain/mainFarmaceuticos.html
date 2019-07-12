@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+
+    <title>Doctor Track</title>
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="form.css" rel="stylesheet" />
+
+    <script>
+      function confereReceitas() {
+        let idReceita = document.getElementById("id_Receita").value;
+        let cpfPaciente = document.getElementById("cpf_paciente").value;
+        let validacao_medico = document.getElementById("validacao_medico").value;
+        let data_validade = document.getElementById("data_validade").value;
+        
+
+        let url = `/receitas/?id=${idReceita}&cpf=${cpfPaciente}&validacao=${validacao_medico}&validade=${data_validade}`;
+        console.log(url);
+        fetch(url)
+          .then(resp => {
+            // console.log("Fetch is working");
+            return resp.json();
+          })
+          .then(data => {
+            // console.log(data.response);
+            document.getElementById("alterar").innerHTML = data.response;
+          });
+      }
+    </script>
+  </head>
+  <body>
+    
+
+    <header>
+      <!-- Fixed navbar -->
+      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" href="home.html">Doctor Track</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarCollapse"
+          aria-controls="navbarCollapse"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav mr-auto">
+           
+            <li class="nav-item  active">
+              <a class="nav-link" href="mainFarmaceuticos.html">Checar Receita</a>
+            </li>
+
+          </ul>
+          <!-- SEARCH -->
+          <form class="form-inline mt-2 mt-md-0">
+            <input
+              class="form-control mr-sm-2"
+              type="text"
+              placeholder="Search"
+              aria-label="Search"
+            />
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+              Search
+            </button>
+          </form>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Begin page content -->
+
+    <div class="container">
+      <div class="py-5 text-center">
+        <img
+          class="d-block mx-auto mb-4"
+          src="../../assets/brand/bootstrap-solid.svg"
+          alt=""
+          width="72"
+          height="72"
+        />
+        <h2>Cheque Receita</h2>
+        <p class="lead">Insira as informacoes para validar receita</p>
+      </div>
+
+      <div class="row">
+        <div class="col-md-4 order-md-2 mb-4">
+          <!-- Resposta Medicamento -->
+          <h4 class="d-flex justify-content-between align-items-center mb-3">
+            <span class="text-muted">Resultado</span>
+          </h4>
+          <ul class="list-group mb-3">
+            <li
+              class="list-group-item d-flex justify-content-between lh-condensed"
+            >
+              <div>
+                <h6 class="my-0" id="alterar">Receita Válida?</h6>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-8 order-md-1">
+          <h4 class="mb-3">Dados da Receita</h4>
+          <form class="needs-validation" novalidate>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="primeiroNome">idReceita</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="id_Receita"
+                  placeholder="id Receita"
+                  value=""
+                  required
+                />
+                <div class="invalid-feedback">
+                  É obrigatório inserir um id válido.
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="primeiroNome">cpf paciente</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="cpf_paciente"
+                  placeholder="cpf paciente"
+                  value=""
+                  required
+                />
+                <div class="invalid-feedback">
+                  É obrigatório inserir um nome válido.
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="primeiroNome">Validacão medico</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="validacao_medico"
+                  placeholder="validacao medico"
+                  value=""
+                  required
+                />
+                <div class="invalid-feedback">
+                  É obrigatório inserir um nome válido.
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="primeiroNome">Data de validade</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="data_validade"
+                  placeholder="dd/mm/aaaa"
+                  value=""
+                  required
+                />
+                <div class="invalid-feedback">
+                  É obrigatório inserir um nome válido.
+                </div>
+              </div>
+            </div>
+
+            <hr class="mb-4" />
+            <button
+              class="btn btn-primary btn-lg btn-block"
+              type="button"
+              onclick="confereReceitas()"
+            >
+              Checar
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <footer class="my-5 pt-5 text-muted text-center text-small">
+        <p class="mb-1">&copy; 2017-2018 Nome da companhia</p>
+        <ul class="list-inline">
+          <li class="list-inline-item"><a href="#">Privacidade</a></li>
+          <li class="list-inline-item"><a href="#">Termos</a></li>
+          <li class="list-inline-item"><a href="#">Suporte</a></li>
+        </ul>
+      </footer>
+    </div>
+
+    <!-- Principal JavaScript do Bootstrap
+  ================================================== -->
+    <!-- Foi colocado no final para a página carregar mais rápido -->
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      window.jQuery ||
+        document.write(
+          '<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>'
+        );
+    </script>
+    <script src="../../assets/js/vendor/popper.min.js"></script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+    <script src="../../assets/js/vendor/holder.min.js"></script>
+    <script>
+      // Exemplo de JavaScript para desativar o envio do formulário, se tiver algum campo inválido.
+      (function() {
+        "use strict";
+
+        window.addEventListener(
+          "load",
+          function() {
+            // Selecione todos os campos que nós queremos aplicar estilos Bootstrap de validação customizados.
+            var forms = document.getElementsByClassName("needs-validation");
+
+            // Faz um loop neles e previne envio
+            var validation = Array.prototype.filter.call(forms, function(form) {
+              form.addEventListener(
+                "submit",
+                function(event) {
+                  if (form.checkValidity() === false) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                  }
+                  form.classList.add("was-validated");
+                },
+                false
+              );
+            });
+          },
+          false
+        );
+      })();
+    </script>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

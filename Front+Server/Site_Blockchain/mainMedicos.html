@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+
+  <title>Doctor Track</title>
+  <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+  </style>
+  <!-- Custom styles for this template -->
+  <link href="form.css" rel="stylesheet" />
+
+  <script>
+    function insereReceita() {
+      let data_validade = document.getElementById("data_validade").value;
+      let validacao_medico = document.getElementById("validacao_medico")
+        .value;
+      let marca_uso = document.getElementById("marca_uso").value;
+      let description = document.getElementById("description").value;
+      let nome_medicamento = document.getElementById("nome_medicamento")
+        .value;
+      let cpf_paciente = document.getElementById("cpf_paciente").value;
+      let nome_medico = document.getElementById("nome_medico").value;
+      let idReceita = document.getElementById("idReceita").value;
+      let nome_paciente = document.getElementById("nome_paciente").value;
+
+      let url = "/receitas";
+
+      fetch(url, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          data_validade: `${data_validade}`,
+          validacao_medico: `${validacao_medico}`,
+          marca_uso: `${marca_uso}`,
+          description: `${description}`,
+          nome_medicamento: `${nome_medicamento}`,
+          cpf_paciente: `${cpf_paciente}`,
+          nome_medico: `${nome_medico}`,
+          idReceita: `${idReceita}`,
+          nome_paciente: `${nome_paciente}`
+        })
+      })
+        .then(resp => {
+          return resp.json();
+        })
+        .then(data => {
+          document.getElementById("alterar").innerHTML = data.response;
+          console.log(data);
+        });
+    }
+  </script>
+</head>
+
+<body>
+  <header>
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+      <a class="navbar-brand" href="home.html">Doctor Track</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+        aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="mainMedicos.html">Inserir Receitas<span class="sr-only">(current)</span></a>
+          </li>
+          <!-- <li class="nav-item"> -->
+          <!-- <a class="nav-link" href="updateReceita.html">Alterar Receitas</a> -->
+          <!-- </li> -->
+        </ul>
+        <!-- SEARCH -->
+        <form class="form-inline mt-2 mt-md-0">
+          <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" />
+          <button class="btn btn-outline-success my-2 my-sm-0" type="button">
+            Search
+          </button>
+        </form>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Begin page content -->
+
+  <div class="container">
+    <div class="py-5 text-center">
+      <img class="d-block mx-auto mb-4" src="../../assets/brand/bootstrap-solid.svg" alt="" width="72" height="72" />
+      <h2>Iserir Receitas</h2>
+      <p class="lead">Cadastro de receitas</p>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12 order-md-1">
+        <h4 class="mb-3">Dados do Medicamento</h4>
+        <form class="needs-validation" novalidate>
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="primeiroNome">idReceita</label>
+              <input type="text" class="form-control" id="idReceita" placeholder="id da receita" value="" required />
+              <div class="invalid-feedback">
+                É obrigatório inserir um nome válido.
+              </div>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <label for="primeiroNome">Nome Medico</label>
+              <input type="text" class="form-control" id="nome_medico" placeholder="nome do medico" value="" required />
+              <div class="invalid-feedback">
+                É obrigatório inserir um nome válido.
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="primeiroNome">Nome Paciente</label>
+              <input type="text" class="form-control" id="nome_paciente" placeholder="nome do paciente" value=""
+                required />
+              <div class="invalid-feedback">
+                É obrigatório inserir um nome válido.
+              </div>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <label for="primeiroNome">cpf do Paciente</label>
+              <input type="text" class="form-control" id="cpf_paciente" placeholder="cpf sem -" value="" required />
+              <div class="invalid-feedback">
+                É obrigatório inserir um nome válido.
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="primeiroNome">Nome Medicamento</label>
+              <input type="text" class="form-control" id="nome_medicamento" placeholder="nome do medicamento" value=""
+                required />
+              <div class="invalid-feedback">
+                É obrigatório inserir um nome válido.
+              </div>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <label for="primeiroNome">Descricao</label>
+              <input type="text" class="form-control" id="description" placeholder="Descricao breve" value=""
+                required />
+              <div class="invalid-feedback">
+                É obrigatório inserir um nome válido.
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="primeiroNome">Marca de Uso</label>
+              <input type="text" class="form-control" id="marca_uso" placeholder="true / false" value="" required />
+              <div class="invalid-feedback">
+                É obrigatório inserir um nome válido.
+              </div>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <label for="primeiroNome">Validacao Medico</label>
+              <input type="text" class="form-control" id="validacao_medico" placeholder="true / false" value=""
+                required />
+              <div class="invalid-feedback">
+                É obrigatório inserir um nome válido.
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="primeiroNome">Data de Validade</label>
+              <input type="text" class="form-control" id="data_validade" placeholder="dd/mm/aaaa" value="" required />
+              <div class="invalid-feedback">
+                É obrigatório inserir um nome válido.
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h6 class="my-0" id="alterar"></h6>
+          </div>
+
+          <hr class="mb-4" />
+          <button class="btn btn-primary btn-lg btn-block" type="button" onclick="insereReceita()">
+            Inserir Receita
+          </button>
+
+          
+
+        </form>
+      </div>
+    </div>
+
+    <footer class="my-5 pt-5 text-muted text-center text-small">
+      <p class="mb-1">&copy; 2017-2018 Nome da companhia</p>
+      <ul class="list-inline">
+        <li class="list-inline-item"><a href="#">Privacidade</a></li>
+        <li class="list-inline-item"><a href="#">Termos</a></li>
+        <li class="list-inline-item"><a href="#">Suporte</a></li>
+      </ul>
+    </footer>
+  </div>
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>

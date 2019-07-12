@@ -1,0 +1,11 @@
+{
+    "login": [
+        {
+            "nome": "ana",
+            "email": "ana@ana.com",
+            "cpf": "12897276789",
+            "senha": "12345",
+            "tipo": "c"
+        }
+    ]
+}
